@@ -1,0 +1,315 @@
+Feature Engineering-3Assignment Questions 
+Assignment 
+Q1. What is Min-Max scaling, and how is it used in data preprocessing? Provide an example to illustrate its  application. 
+Min-Max scaling, also known as normalization, is a data preprocessing technique used to transform numeric features in a dataset to a specific range. The goal of Min-Max scaling is to rescale the features so that they fall within a certain range, typically between 0 and 1. This process is particularly useful when different features have different scales or units, as it can help prevent features with larger values from dominating the analysis or modeling process
+The formula for Min-Max scaling is as follows:
+Scaled Value=Original Value−Minimum ValueMaximum Value−Minimum Value
+Scaled Value=
+Maximum Value−Minimum Value
+Original Value−Minimum Value
+​
+Here's an example to illustrate the application of Min-Max scaling:
+Suppose you have a dataset with two features: "Age" and "Income." The "Age" feature ranges from 0 to 100, while the "Income" feature ranges from $20,000 to $100,000. Since the two features have different scales, you decide to apply Min-Max scaling to ensure that they both fall within the range of 0 to 1.
+| Age | Income |
+|-----|--------|
+| 25  | 40000  |
+| 50  | 60000  |
+| 30  | 80000  |
+| 65  | 50000  |
+
+
+
+
+Min-Max scaling, also known as normalization, is a data preprocessing technique used to transform numeric features in a dataset to a specific range. The goal of Min-Max scaling is to rescale the features so that they fall within a certain range, typically between 0 and 1. This process is particularly useful when different features have different scales or units, as it can help prevent features with larger values from dominating the analysis or modeling process.
+The formula for Min-Max scaling is as follows:
+Scaled Value=Original Value−Minimum ValueMaximum Value−Minimum Value
+Scaled Value=
+Maximum Value−Minimum Value
+Original Value−Minimum Value
+​
+Here's an example to illustrate the application of Min-Max scaling:
+Suppose you have a dataset with two features: "Age" and "Income." The "Age" feature ranges from 0 to 100, while the "Income" feature ranges from $20,000 to $100,000. Since the two features have different scales, you decide to apply Min-Max scaling to ensure that they both fall within the range of 0 to 1.
+Original Data:
+lua
+Copy code
+| Age | Income |
+|-----|--------|
+| 25  | 40000  |
+| 50  | 60000  |
+| 30  | 80000  |
+| 65  | 50000  |
+
+
+Min-Max Scaling:
+Calculate the minimum and maximum values for each feature:
+Minimum Age: 25
+Maximum Age: 65
+Minimum Income: 40000
+Maximum Income: 80000
+Apply the Min-Max scaling formula to each value in the dataset:
+Scaled Age = (Age - Minimum Age) / (Maximum Age - Minimum Age)
+Scaled Income = (Income - Minimum Income) / (Maximum Income - Minimum Income)
+| Scaled Age | Scaled Income |
+|------------|---------------|
+| 0.0        | 0.0           |
+| 0.5        | 0.3333        |
+| 0.125      | 0.6667        |
+| 1.0        | 0.1667        |
+
+
+
+
+
+Q2. What is the Unit Vector technique in feature scaling, and how does it differ from Min-Max scaling?  Provide an example to illustrate its application. 
+The Unit Vector technique, also known as Vector Normalization, is a feature scaling method that transforms the data in such a way that each data point (vector) lies on the unit hyper-sphere. In other words, it scales each feature in a data point to have a magnitude of 1 while maintaining the direction of the original vector. This normalization is particularly useful when the scale of different features varies significantly and you want to ensure that all features contribute equally to the analysis.
+
+The formula for calculating the unit vector of a data point is as follows:
+
+\[
+\text{Unit Vector} = \frac{\text{Original Vector}}{\|\text{Original Vector}\|}
+\]
+
+Here's an example to illustrate the application of the Unit Vector technique:
+
+Suppose you have a dataset with two features: "Age" (ranging from 0 to 100) and "Income" (ranging from $20,000 to $100,000). You want to apply the Unit Vector technique to normalize these features.
+
+**Original Data:**
+```
+| Age | Income |
+|-----|--------|
+| 25  | 40000  |
+| 50  | 60000  |
+| 30  | 80000  |
+| 65  | 50000  |
+```
+
+**Unit Vector Scaling:**
+1. For each data point (vector), calculate the magnitude using the Euclidean norm:
+   - Magnitude = \(\sqrt{\text{Age}^2 + \text{Income}^2}\)
+
+2. Divide each feature by the calculated magnitude to get the unit vector for that data point:
+   - Unit Vector (Age) = Age / Magnitude
+   - Unit Vector (Income) = Income / Magnitude
+
+**Unit Vector Scaled Data:**
+```
+| Unit Vector (Age) | Unit Vector (Income) |
+|-------------------|-----------------------|
+| 0.5731            | 0.8193                |
+| 0.5731            | 0.8193                |
+| 0.2733            | 0.9619                |
+| 0.6482            | 0.7615                |
+```
+
+After applying the Unit Vector technique, each data point now lies on the unit hyper-sphere, ensuring that the magnitude of each vector is 1 while preserving the direction of the original vector. This can be particularly useful in algorithms that rely on distance measures or when you want to ensure that features with varying scales contribute equally to the analysis.
+
+It's important to note that while the Unit Vector technique can handle varying scales, it might not always be suitable for every algorithm or context. Depending on the nature of the data and the algorithm you're using, other scaling methods like Min-Max scaling or Z-score normalization might be more appropriate.
+
+Q3. What is PCA (Principle Component Analysis), and how is it used in dimensionality reduction? Provide an  example to illustrate its application. 
+Principal Component Analysis (PCA) is a widely used dimensionality reduction technique in machine learning and data analysis. It's used to transform high-dimensional data into a lower-dimensional space while retaining as much of the original data's variance as possible. PCA achieves this by identifying and extracting a set of new, uncorrelated variables called principal components, which are linear combinations of the original features.
+Here's an example to illustrate the application of PCA for dimensionality reduction:
+Suppose you have a dataset of house attributes with three features: "Square Footage," "Number of Bedrooms," and "Number of Bathrooms." You want to reduce the dimensionality of the dataset while preserving the most important information.
+| Square Footage | Bedrooms | Bathrooms |
+|----------------|----------|-----------|
+| 1500           | 3        | 2         |
+| 2000           | 4        | 3         |
+| 1200           | 2        | 1         |
+| 1800           | 3        | 2         |
+
+Applying PCA:
+Standardize the data by subtracting the mean and dividing by the standard deviation for each feature. This ensures that features are on similar scales.
+Calculate the covariance matrix of the standardized data.
+Compute the eigenvalues and eigenvectors of the covariance matrix.
+Sort the eigenvectors by their corresponding eigenvalues in decreasing order. These eigenvectors become the principal components.
+Choose the top
+�
+k principal components, where
+�
+k is the desired number of dimensions in the reduced space.
+Project the original data onto the
+�
+k-dimensional space defined by the selected principal components.
+| Principal Component 1 | Principal Component 2 |
+|-----------------------|-----------------------|
+| -0.86                 | 0.27                  |
+| 1.38                  | -0.33                 |
+| -1.15                 | -0.10                 |
+| 0.63                  | 0.16                  |
+
+
+Q4. What is the relationship between PCA and Feature Extraction, and how can PCA be used for Feature  Extraction? Provide an example to illustrate this concept. 
+PCA (Principal Component Analysis) and feature extraction are closely related concepts in the field of dimensionality reduction and data analysis. PCA is a technique that can be used for feature extraction to reduce the dimensionality of a dataset by transforming the original features into a new set of features called principal components. These principal components capture the most important information and variability in the data, effectively summarizing the original features in a lower-dimensional space.
+Step 1: Standardization or Normalization: Before applying PCA, it's common to standardize or normalize the data to ensure that features are on similar scales. This step helps prevent features with larger values from dominating the analysis.
+Step 2: Covariance Matrix Calculation: Calculate the covariance matrix of the standardized data. The covariance matrix provides information about the relationships and variability between different features.
+Step 3: Eigenvalue and Eigenvector Calculation: Compute the eigenvalues and corresponding eigenvectors of the covariance matrix. The eigenvalues represent the amount of variance captured by each principal component, and the eigenvectors define the directions of these components.
+Step 4: Sort Eigenvalues and Eigenvectors: Sort the eigenvectors based on their corresponding eigenvalues in decreasing order. This ensures that the principal components are ranked by the amount of variance they explain.
+Step 5: Select Principal Components: Choose the top
+�
+k principal components, where
+�
+k is the desired reduced dimensionality. These principal components are a linear combination of the original features and represent the most significant patterns in the data.
+Step 6: Transform Data: Transform the original data using the selected principal components as transformation vectors. The transformed data now resides in a lower-dimensional space defined by the principal components.
+| Height | Weight |
+|--------|--------|
+| 65     | 150    |
+| 70     | 160    |
+| 62     | 135    |
+| 68     | 170    |
+
+| Principal Component 1 |
+|-----------------------|
+| -0.826                |
+| 0.498                 |
+| -0.985                |
+| 1.313                 |
+
+
+
+Q5. You are working on a project to build a recommendation system for a food delivery service. The dataset  contains features such as price, rating, and delivery time. Explain how you would use Min-Max scaling to  preprocess the data
+Using Min-Max scaling to preprocess the data for building a recommendation system involves transforming the features in the dataset to a common range (usually between 0 and 1) while preserving their relationships and distributions. This ensures that each feature contributes equally to the analysis and modeling, preventing any feature with larger values from dominating the results. Here's how you would use Min-Max scaling to preprocess the data for your food delivery service recommendation system:
+
+1. **Understand the Data:**
+   Begin by thoroughly understanding the dataset and the meaning of each feature. In your case, the features include "price," "rating," and "delivery time."
+
+2. **Data Preprocessing:**
+   Clean and preprocess the dataset to handle missing values, outliers, and any other data quality issues.
+
+3. **Choose Features:**
+   Select the features that you want to scale using Min-Max scaling. In your case, you'll likely want to scale the "price," "rating," and "delivery time" features.
+
+4. **Calculate Min-Max Scaling:**
+   For each selected feature, calculate the minimum and maximum values in the dataset. These values will be used to perform the scaling.
+
+5. **Apply Min-Max Scaling Formula:**
+   For each data point, apply the Min-Max scaling formula to scale the feature values to the range [0, 1]:
+   
+   \[
+   \text{Scaled Value} = \frac{\text{Original Value} - \text{Minimum Value}}{\text{Maximum Value} - \text{Minimum Value}}
+   \]
+
+   This formula scales each feature value proportionally to its distance between the minimum and maximum values.
+
+6. **Update Scaled Data:**
+   Replace the original feature values with their scaled counterparts in the dataset.
+
+7. **Interpret Scaled Data:**
+   After scaling, all the selected features will now have values between 0 and 1. These scaled values can be interpreted as relative measures within their respective ranges.
+
+Here's a hypothetical example of the Min-Max scaling process applied to a subset of your data:
+
+**Original Data:**
+```
+| Price ($) | Rating (0-5) | Delivery Time (min) |
+|-----------|--------------|---------------------|
+| 10        | 4.5          | 30                  |
+| 20        | 3.7          | 45                  |
+| 15        | 4.9          | 25                  |
+| 25        | 4.2          | 35                  |
+```
+
+**Min-Max Scaling:**
+1. Calculate minimum and maximum values for each feature:
+   - Minimum Price: 10, Maximum Price: 25
+   - Minimum Rating: 3.7, Maximum Rating: 4.9
+   - Minimum Delivery Time: 25, Maximum Delivery Time: 45
+
+2. Apply Min-Max scaling formula to each value in the dataset:
+   - Scaled Price = (Price - Minimum Price) / (Maximum Price - Minimum Price)
+   - Scaled Rating = (Rating - Minimum Rating) / (Maximum Rating - Minimum Rating)
+   - Scaled Delivery Time = (Delivery Time - Minimum Delivery Time) / (Maximum Delivery Time - Minimum Delivery Time)
+
+**Scaled Data:**
+```
+| Scaled Price | Scaled Rating | Scaled Delivery Time |
+|--------------|---------------|----------------------|
+| 0.0          | 0.6667        | 0.0                  |
+| 0.5          | 0.0           | 1.0                  |
+| 0.25         | 1.0           | 0.25                 |
+| 1.0          | 0.3333        | 0.5                  |
+```
+
+After Min-Max scaling, the feature values are transformed to fall within the range of 0 to 1, making them comparable and suitable for building a recommendation system that considers all features equally.
+. 
+Q6. You are working on a project to build a model to predict stock prices. The dataset contains many  features, such as company financial data and market trends. Explain how you would use PCA to reduce the  dimensionality of the dataset. 
+Using PCA (Principal Component Analysis) to reduce the dimensionality of a dataset for building a stock price prediction model involves transforming the original features into a new set of uncorrelated features (principal components) while retaining as much of the original data's variance as possible. This reduction in dimensionality can help simplify the modeling process, mitigate the curse of dimensionality, and potentially improve the model's generalization capabilities. Here's how you would use PCA to achieve dimensionality reduction in your stock price prediction project:
+
+1. **Understand the Data and Features:**
+   Gain a deep understanding of the dataset, including the meaning and relevance of each feature. In your case, features could include company financial metrics, market indicators, trading volumes, historical prices, and more.
+
+2. **Data Preprocessing:**
+   Clean, preprocess, and normalize the dataset to handle any missing values, outliers, and data quality issues. Standardizing or normalizing the data is particularly important when applying PCA to ensure that features are on similar scales.
+
+3. **Covariance Matrix Calculation:**
+   Calculate the covariance matrix of the standardized or normalized dataset. The covariance matrix provides insights into how features are correlated with each other.
+
+4. **Eigenvalue and Eigenvector Calculation:**
+   Compute the eigenvalues and corresponding eigenvectors of the covariance matrix. These eigenvalues represent the variance explained by each principal component, and the eigenvectors define the directions of the principal components.
+
+5. **Sort Eigenvalues and Eigenvectors:**
+   Sort the eigenvectors based on their corresponding eigenvalues in decreasing order. This way, the most significant principal components, which capture the most variance, come first.
+
+6. **Select Principal Components:**
+   Choose the top \(k\) principal components that you want to retain in the reduced-dimensional space. Typically, you'd aim to retain principal components that cumulatively capture a large portion (e.g., 95%) of the total variance.
+
+7. **Transform Data:**
+   Transform the original data by projecting it onto the \(k\)-dimensional space defined by the selected principal components. This transformation yields a new dataset with reduced dimensions.
+
+8. **Model Training and Evaluation:**
+   Train your stock price prediction model using the reduced-dimensional dataset. Evaluate the model's performance on validation or test data to assess its predictive accuracy.
+
+It's important to note that while PCA can help in dimensionality reduction, the interpretability of the transformed features (principal components) might be limited. Therefore, it's a trade-off between reducing the complexity of the dataset and maintaining the interpretability of features. Additionally, PCA assumes that the features are linearly correlated, which might not hold true for all datasets.
+
+Keep in mind that dimensionality reduction should be applied thoughtfully, as it might not always lead to improved model performance. Experimentation and evaluation are crucial to determining the optimal number of principal components to retain and their impact on your stock price prediction model.
+
+Q7. For a dataset containing the following values: [1, 5, 10, 15, 20], perform Min-Max scaling to transform the  values to a range of -1 to 1. 
+To perform Min-Max scaling on the dataset [1, 5, 10, 15, 20] and transform the values to a range of -1 to 1, you can follow these steps:
+
+1. **Calculate Minimum and Maximum:**
+   Calculate the minimum and maximum values in the original dataset.
+   
+   - Minimum Value: 1
+   - Maximum Value: 20
+
+2. **Apply Min-Max Scaling Formula:**
+   Apply the Min-Max scaling formula to each value in the dataset to scale them to the range of -1 to 1:
+
+   \[
+   \text{Scaled Value} = -1 + \frac{2 \times (\text{Original Value} - \text{Minimum Value})}{\text{Maximum Value} - \text{Minimum Value}}
+   \]
+
+   Note that we're using the formula for scaling to a different range, [-1, 1], by subtracting 1 and then multiplying by 2.
+
+3. **Apply Formula to Each Value:**
+
+   For each value in the dataset, apply the Min-Max scaling formula:
+
+   - For Original Value 1: 
+     \[
+     \text{Scaled Value} = -1 + \frac{2 \times (1 - 1)}{20 - 1} = -1
+     \]
+   - For Original Value 5: 
+     \[
+     \text{Scaled Value} = -1 + \frac{2 \times (5 - 1)}{20 - 1} = -0.6
+     \]
+   - For Original Value 10: 
+     \[
+     \text{Scaled Value} = -1 + \frac{2 \times (10 - 1)}{20 - 1} = -0.1
+     \]
+   - For Original Value 15: 
+     \[
+     \text{Scaled Value} = -1 + \frac{2 \times (15 - 1)}{20 - 1} = 0.4
+     \]
+   - For Original Value 20: 
+     \[
+     \text{Scaled Value} = -1 + \frac{2 \times (20 - 1)}{20 - 1} = 1
+     \]
+
+So, after applying Min-Max scaling, the values in the dataset [1, 5, 10, 15, 20] are transformed to the range of [-1, 1] as follows:
+
+```
+[-1, -0.6, -0.1, 0.4, 1]
+```
+
+Q8. For a dataset containing the following features: [height, weight, age, gender, blood pressure], perform  Feature Extraction using PCA. How many principal components would you choose to retain, and why? 
+Note:  Create your assignment in Jupyter notebook and upload it to GitHub & share that github repository  link through your dashboard. Make sure the repository is public.
+Data Science Masters 
